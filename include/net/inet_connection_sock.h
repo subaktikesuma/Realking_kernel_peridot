@@ -140,8 +140,9 @@ struct inet_connection_sock {
 
 	ANDROID_KABI_RESERVE(1);
 
-	u64			  icsk_ca_priv[112 / sizeof(u64)];
-#define ICSK_CA_PRIV_SIZE      (14 * sizeof(u64))
+	/* XXX inflated by temporary internal debugging info */
+	u64			  icsk_ca_priv[216 / sizeof(u64)];
+ #define ICSK_CA_PRIV_SIZE	  sizeof_field(struct inet_connection_sock, icsk_ca_priv)
 };
 
 #define ICSK_TIME_RETRANS	1	/* Retransmit timer */
