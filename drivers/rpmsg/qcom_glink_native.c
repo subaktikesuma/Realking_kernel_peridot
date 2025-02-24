@@ -542,7 +542,7 @@ static int qcom_glink_send_version(struct qcom_glink *glink)
 	struct glink_msg msg;
 
 	msg.cmd = cpu_to_le16(RPM_CMD_VERSION);
-	msg.param1 = cpu_to_le16(GLINK_VERSION_1);
+	msg.param1 = cpu_to_le16(RPM_VERSION_1);
 	msg.param2 = cpu_to_le32(glink->features);
 
 	GLINK_INFO(glink->ilc, "vers:%d features:%d\n", msg.param1, msg.param2);
@@ -554,7 +554,7 @@ static void qcom_glink_send_version_ack(struct qcom_glink *glink)
 	struct glink_msg msg;
 
 	msg.cmd = cpu_to_le16(RPM_CMD_VERSION_ACK);
-	msg.param1 = cpu_to_le16(GLINK_VERSION_1);
+	msg.param1 = cpu_to_le16(RPM_VERSION_1);
 	msg.param2 = cpu_to_le32(glink->features);
 
 	GLINK_INFO(glink->ilc, "vers:%d features:%d\n", msg.param1, msg.param2);
@@ -1574,7 +1574,8 @@ static int qcom_glink_native_rx(struct qcom_glink *glink, int iterations)
 			qcom_glink_rx_advance(glink, ALIGN(sizeof(msg), 8));
 			break;
 		case RPM_CMD_OPEN:
-			ret = qcom_glink_rx_defer(glink, param2);
+			/* upper 16 bits of param2 are the "prio" field */
+			ret = qcom_glink_rx_defer(glink, param2 & 0xffff);
 			break;
 		case RPM_CMD_TX_DATA:
 		case RPM_CMD_TX_DATA_CONT:
