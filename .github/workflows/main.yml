@@ -7,9 +7,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout kernel source
-      uses: actions/checkout@v4
-
     - name: Install dependencies
       run: |
           sudo apt update
@@ -18,6 +15,9 @@ jobs:
             clang-17 lld-17
           sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
           sudo update-alternatives --install /usr/bin/ld.lld ld.lld /usr/bin/ld.lld-17 100
+          
+    - name: Checkout kernel source
+      uses: actions/checkout@v4
 
     - name: Set up MemKernel as a module (M-OUT) with specified name
       run: |
