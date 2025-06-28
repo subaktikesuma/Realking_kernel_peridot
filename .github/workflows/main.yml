@@ -21,7 +21,7 @@ jobs:
         NAME: peridot
       with:
         arch: arm64
-        compiler: clang/13
+        compiler: clang/17
         defconfig: peridot_defconfig
         image: Image.gz-dtb
 
