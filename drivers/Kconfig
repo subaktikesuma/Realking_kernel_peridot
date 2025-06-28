@@ -238,6 +238,4 @@ source "drivers/most/Kconfig"
 source "drivers/peci/Kconfig"
 
 source "drivers/hte/Kconfig"
-
-source "drivers/kernelsu/Kconfig"
 endmenu
