@@ -13,8 +13,6 @@ jobs:
           sudo apt install -y make bc bison flex libssl-dev \
             libncurses5-dev libelf-dev build-essential git \
             clang-17 lld-17
-          sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
-          sudo update-alternatives --install /usr/bin/ld.lld ld.lld /usr/bin/ld.lld-17 100
           
     - name: Checkout kernel source
       uses: actions/checkout@v4
