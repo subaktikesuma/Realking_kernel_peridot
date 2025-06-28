@@ -21,7 +21,7 @@ jobs:
         NAME: peridot
       with:
         arch: arm64
-        compiler: gcc/14
+        compiler: gcc/12
         defconfig: peridot_defconfig
         image: Image.gz-dtb
 
